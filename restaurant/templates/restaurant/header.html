@@ -1,0 +1,20 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<header class="header menu-header">
+    <div class="container">
+        <div class="header__content">
+            <div class="header__logo">
+                <a href="index.html"><img src="{% static 'images/img/logo.png' %}" alt="logo"></a>
+            </div>
+            <ul class="head_menu">
+                <li><a href="{% url 'restaurant:home' %}">{% trans "Home" %}</a></li>
+                <li><a href="#haqqimizda">{% trans "About us" %}</a></li>
+                <li><a href="{% url 'restaurant:menu' 5 %}">{% trans "Menu" %}</a></li>
+                <li><a href="{% url 'restaurant:gallery' %}">{% trans "Gallery" %}</a></li>
+                <li><a href="{% url 'restaurant:contact' %}">{% trans "Contact" %}</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

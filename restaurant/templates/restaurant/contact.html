@@ -1,0 +1,33 @@
+{% extends 'restaurant/index.html' %}
+{% load static %}
+{% load i18n %}
+{% include 'restaurant/header.html' %}
+
+{% block content %}
+<div class="contact">
+    <div class="container">
+        <h2 class="contact-title">{% trans "Contact" %}</h2>
+        <div class="contact__content">
+            <div class="contact-text">
+                <p>{% trans "Neftchilar Avenue 78, Seaside Boulevard, Baku" %} </p>
+                <p>{% trans "Monday" %} - {% trans "Friday" %} 10:00-00:00
+                    {% trans "Saturday" %} - {% trans "Sunday" %} 09:00-02:00 </p>
+                <p>+994 55 123 45 67
+                    +994 55 123 45 67
+                </p>
+            </div>
+            <img src="{% static 'images/img/contact.png' %}" alt="">
+        </div>
+    </div>
+    <div class="contact__bottom">
+        <div class="container">
+            <div class="bottom">
+                <div>
+                    {% trans "Neftchilar Avenue 78, Seaside Boulevard, Baku" %} 
+                    <a href="{% url 'restaurant:address' %}"><button>{% trans "View in Map" %}</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

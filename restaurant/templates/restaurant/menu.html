@@ -1,0 +1,63 @@
+{% extends 'restaurant/index.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="menu">
+    <div class="container">
+        <div class="menu__content">
+            <h2 class="menu__title">{% trans "Menu" %}</h2>
+            <nav class="menu__nav">
+                <ul class="menu__list">
+                    {% for category in categories %}
+                    <li class="menu__item">
+                        <a href="{% url 'restaurant:menu' category.id %}">{{category.name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    {% for menu in menus %}
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="menu__card red-back">
+        <div class="container" id="#">
+            <h2 class="menu__card-title" >{{menu.menu_name}}</h2>
+            <div class="menu__card-content">
+                <img src={{menu.picture.url}}  alt="">
+                <div class="menu__card-left">
+                    <ul class="menu__card-list">
+                        {% for meal in menu.menu_meals.all %}
+                        <li class="menu__card-item">
+                            <p> {{meal.meal_name}} </p>
+                            <h3>$ {{meal.price}}</h3>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="menu__card">
+        <div class="container" id="#">
+            <h2 class="menu__card-title" >{{menu.menu_name}}</h2>
+            <div class="menu__card-content">
+                <div class="menu__card-left">
+                    <ul class="menu__card-list">
+                        {% for meal in menu.menu_meals.all %}
+                        <li class="menu__card-item">
+                            <p> {{meal.meal_name}} </p>
+                            <h3>$ {{meal.price}}</h3>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <img src={{menu.picture.url}} alt="">
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock content %}

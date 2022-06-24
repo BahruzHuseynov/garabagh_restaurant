@@ -1,0 +1,144 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block page_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    {% endblock page_styles %}
+    <title>Qarabag</title>
+</head>
+
+<body>
+    
+    {% include 'restaurant/header.html' %}
+    {% block content %}
+    <div class="intro" id="ana-sehife">
+        <div class="container">
+            <div class="intro__content">
+                <h1 class="intro__title">Lorem ipsum. Dolor sit.</h1>
+                <p class="intro__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget lacus convallis
+                    interdum mollis amet commodo lore.</p>
+                <p class="intro__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="intro__cards">
+                    <div class="intro__card">
+                        <img src="{% static 'images/img/icon_time.svg' %}" alt="icon">
+                        <p>{% trans "Monday" %} - {% trans "Friday" %} 10:00-00:00 <br> {% trans "Saturday" %} - {% trans "Sunday" %} 09:00-02:00</p>
+                    </div>
+                    <div class="intro__card">
+                        <img src="{% static 'images/img/icon_location.svg' %}" alt="icon">
+                        <p>{% trans "Neftchilar Avenue 78, Seaside Boulevard, Baku" %} </p>
+                    </div>
+                    <div class="intro__card">
+                        <img src="{% static 'images/img/icon_phone.svg' %}" alt="icon">
+                        <p>+994 55 123 45 67</p>
+                        <p>+994 55 123 45 67</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About -->
+    <div class="haqqimizda" id="haqqimizda">
+        <div>
+            <img src="{% static 'images/img/about.png' %}" alt="">
+        </div>
+        <h2>{% trans "About us" %}</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis doloribus modi
+            rerum magni autem fuga sequi quia labore possimus qui facilis et nostrum obcaecati,
+            eos consequatur sunt temporibus asperiores. Et vitae, numquam eveniet sapiente distinctio
+            sint necessitatibus harum neque commodi culpa accusantium, ducimus velit hic tenetur impedi
+            t dolore! Dolorum, quaerat. Dicta neque quidem debitis earum odit harum adipisci eius sed et
+            voluptas illum ut omnis beatae amet accusantium atque, corporis quisquam natus illo qui ratione
+            architecto. Iste recusandae maxime, amet atque libero provident est aliquam distinctio perspiciatis
+            quasi ducimus laborum enim sequi sed adipisci sint fugit suscipit facilis consequatur exercitationem
+            id voluptates facere consequuntur. Commodi, a eaque. Placeat obcaecati nostrum inventore quam officiis
+            dicta,
+            nobis labore? Porro voluptatem eaque cum eum velit saepe, sed aliquid totam molestias ipsum numquam nihil
+            laudantium voluptate tempore! Aspernatur, perferendis culpa possimus incidunt minus voluptates dolores
+            deleniti. Tempore ex at fuga facilis, quis similique. Iste aut et, doloremque cumque ducimus rem commodi
+            hic quaerat ullam rerum facere? Rem veritatis quasi recusandae deleniti quos tempora tempore aut qui?
+            Perferendis, magni reiciendis illum inventore quo nihil vitae ea? Quas, dolores harum alias repudiandae non
+            id sit vitae quae esse deleniti aspernatur nihil sapiente sunt at mollitia vero ea possimus ex facilis
+            eveniet eaque repellat. Animi omnis officia at obcaecati doloremque repellendus nisi ea nemo exercitationem
+
+        </p>
+    </div>
+
+
+    <div class="menu">
+        <div class="container">
+            <div class="menu__content">
+                <h2 class="menu__title">{% trans "Menu" %}</h2>
+                <div class="carousel">
+                    {% for lam in last_added_menus %}
+                    <div class="carousel_card">
+                        <img src={{lam.picture.url}} alt="card">
+                        <div>
+                            <h4>See the menu</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'restaurant:menu' 5 %}"><button class="btn">{% trans "Menu" %}</button></a> 
+
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__left">
+                    <a href="index.html"><img class="footer__logo" src="img/logo.png" alt=""></a>
+                    <select name="language" id="lang_select" onchange="document.location.href=this.value" value="az">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        <option value="">{% trans "Language" %}</option>
+                        {% for lang in languages %}
+                            <option value="/{{lang.code}}/{{request.get_full_path|slice:"4:"}}"> {{lang.name_local}} </option>
+                        {% endfor %}
+                    </select>
+                    <div class="footer__socials">
+                        <a href=""><img src="{% static 'images/img/icon_wp.svg' %}" alt=""></a>
+                        <a href=""><img src="{% static 'images/img/icon_fb.svg' %}" alt=""></a>
+                        <a href=""><img src="{% static 'images/img/icon_ins.svg' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="footer__right">
+                    <ul class="footer__list">
+                        <h3 class="footer__title">{% trans "Info" %}</h3>
+                        <li class="footer__item">
+                            <a href="{% url 'restaurant:gallery' %}" class="footer__link">{% trans "Gallery" %}</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="{% url 'restaurant:contact' %}" class="footer__link">{% trans "Contact" %}</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="#haqqimizda" class="footer__link">{% trans "About us" %}</a>
+                        </li>
+                    </ul>
+                    <ul class="footer__list">
+                        <h3 class="footer__title">{% trans "Address" %}</h3>
+                        <p class="footer__text">{% trans "Neftchilar Avenue 78" %}</p>
+                        <p class="footer__text">{% trans "Monday" %} - {% trans "Sunday" %} 09:00-02:00</p>
+                        <p class="footer__text">+994 55 123 45 67 </p>
+                    </ul>
+                </div>
+                <button class="back-to-top"><img src="{% static 'images/img/icon_toTop.svg' %}" alt=""></button>
+                <button class="chatbot"><img src="{% static 'images/img/chat.png' %}" alt=""></button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/backtotop.js' %}"></script>
+</body>
+</html>
